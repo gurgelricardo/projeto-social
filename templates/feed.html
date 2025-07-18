@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Feed - caralhivros{% endblock %}
+
+{% block content %}
+<div class="container feed-layout">
+
+    <div class="feed-main">
+        <div class="post-creator">
+            <form method="post">
+                <textarea placeholder="No que vc tá pensando, @{{ user.username }}?" maxlength="1000"></textarea>
+                <button type="submit" class="btn" style="width: auto; padding: 0.5rem 1.5rem; float: right; margin-top: 0.5rem;">Postar</button>
+            </form>
+        </div>
+
+        <div class="post">
+            <h4><a href="#">@amigo_aleatorio</a></h4>
+            <div class="post-meta">18 de Julho de 2025</div>
+            <p>Isso aqui é um exemplo de como um post vai aparecer. A paleta de cores lilás e azul neon dá uma vibe bem legal pra essa rede social, não acha?</p>
+        </div>
+        <div class="post">
+            <h4><a href="#">@voce_mesmo</a></h4>
+            <div class="post-meta">17 de Julho de 2025</div>
+            <p>Testando o layout e a estrutura da página. O limite de 1000 caracteres parece um bom começo pra evitar textão demais.</p>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="user-info-card">
+            <h3>@{{ user.username }}</h3>
+            <p><strong>Biografia:</strong> {{ user.bio|default:"Você ainda não tem uma biografia." }}</p>
+            <p><strong>Na rede desde:</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+        </div>
+    </aside>
+
+</div>
+{% endblock %}

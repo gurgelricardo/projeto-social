@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Convidar - caralhivros{% endblock %}
+
+{% block content %}
+<div class="form-card" style="margin-top: 80px;">
+    <h2>Convidar para o caralhivros</h2>
+    <p style="text-align: center; margin-bottom: 1.5rem;">Envie um convite para alguém se juntar à rede.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Gerar Convite</button>
+    </form>
+</div>
+{% endblock %}

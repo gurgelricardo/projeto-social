@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Bem-vindo ao caralhivros{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center;">
+    <h1 style="font-size: 4rem; color: var(--lilac-neon); text-shadow: 0 0 10px var(--lilac-neon), 0 0 20px var(--lilac-neon); margin-top: 20vh;">
+        caralhivros
+    </h1>
+    <p style="font-size: 1.5rem; color: var(--blue-neon); margin-bottom: 2rem;">A sua rede social, sem papas na língua.</p>
+    <a href="{% url 'login' %}" class="btn" style="max-width: 200px; margin: 0 auto; display: block;">Entrar</a>
+</div>
+{% endblock %}

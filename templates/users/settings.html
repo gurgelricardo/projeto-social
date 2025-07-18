@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Configurações - caralhivros{% endblock %}
+
+{% block content %}
+<div class="form-card" style="margin-top: 80px;">
+    <h2>Configurar Conta</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" id="email" value="{{ user.email }}">
+        
+        <label for="bio">Biografia</label>
+        <textarea id="bio" rows="4">{{ user.bio }}</textarea>
+
+        <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
+</div>
+{% endblock %}
