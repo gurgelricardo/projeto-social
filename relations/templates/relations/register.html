@@ -1,0 +1,14 @@
+<h1>Complete seu cadastro</h1>
+<p>Você foi convidado por um amigo para se juntar à rede. Preencha seus dados abaixo.</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Finalizar</button>
+</form>
