@@ -7,50 +7,40 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import login
 from users.forms import RegisterUser
 from relations.models import Invite
+from django.core.mail import send_mail
+from socials.models import Post
 
 
 @login_required
 def create_invite(request):
     if request.method == "POST":
-        form = Invite_Forms(request.POST)
-        if form.is_valid():
-            recipient_email = form.cleaned_data["email"]
+        invite = Invite.objects.create(sender=request.user)
 
-            invite = Invite.objects.create(
-                remetente=request.user, destinatario_email=recipient_email
-            )
+        invite_url = request.build_absolute_uri(f"/invite/{invite.invite_id}/")
 
-            invite_url = request.build_absolute_uri(f"/invite/{invite.id}/")
+        messages.success(
+            request,
+            "Link de convite único gerado! Copie e compartilhe:",
+        )
+        messages.info(request, invite_url)
 
-            messages.success(
-                request,
-                f"invite criado! Compartilhe este link: {invite_url}",
-            )
-            return redirect("create_invite")
-    else:
-        form = Invite_Forms()
+        return redirect("relations:create_invite")
 
-    return render(request, "relations/create_invite.html", {"form": form})
+    return render(request, "relations/create_invite.html")
 
 
 def register_by_invite(request, invite_id):
-    invite = get_object_or_404(Invite, id=invite_id, status="PENDENTE")
+    invite = get_object_or_404(Invite, invite_id=invite_id, status="PENDENTE")
 
     if request.method == "POST":
-        form = ReferenceError(request.POST)
+        form = RegisterUser(request.POST)
         if form.is_valid():
-            if form.cleaned_data["email"] != invite.destinatario_email:
-                messages.error(
-                    request,
-                    "Erro: Você deve se cadastrar com o mesmo e-mail para o qual o invite foi enviado.",
-                )
-                return render(request, "usuarios/register.html", {"form": form})
-
             new_user = form.save()
-
             sender = invite.sender
+            sender.relations.add(new_user)
 
-            sender.conexoes.add(new_user)
+            post_content = f"olá mundo! entrei à convite do @{sender.username}"
+            Post.objects.create(author=new_user, content=post_content)
 
             invite.status = "ACEITO"
             invite.save()
@@ -60,9 +50,9 @@ def register_by_invite(request, invite_id):
             messages.success(
                 request, "Cadastro concluído com sucesso! Você já está conectado(a)."
             )
-            return redirect("home")
+            return redirect("socials:feed")
 
     else:
-        form = RegisterUser(initial={"email": invite.recipient_email})
+        form = RegisterUser()
 
     return render(request, "relations/register.html", {"form": form})

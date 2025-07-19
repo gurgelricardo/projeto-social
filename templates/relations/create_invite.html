@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Convidar - caralhivros{% endblock %}
+{% block title %}Gerar Convite - caralhivros{% endblock %}
 
 {% block content %}
 <div class="form-card" style="margin-top: 80px;">
-    <h2>Convidar para o caralhivros</h2>
-    <p style="text-align: center; margin-bottom: 1.5rem;">Envie um convite para alguém se juntar à rede.</p>
+    <h2>Gerar Link de Convite</h2>
+    <p style="text-align: center; margin-bottom: 1.5rem;">
+        Clique no botão abaixo para gerar um link de convite único.
+        <br>
+        <strong>Este link só pode ser usado uma vez.</strong>
+    </p>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Gerar Convite</button>
+        <button type="submit" class="btn">Gerar Link Único</button>
     </form>
 </div>
 {% endblock %}

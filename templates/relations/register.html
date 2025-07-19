@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Complete seu Cadastro - caralhivros{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Complete seu Cadastro</h2>
+    <p style="text-align: center; margin-bottom: 1.5rem;">Você foi convidado(a) para o caralhivros. Preencha seus dados para entrar.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red; text-align: center;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Usuário:</label>
+            {{ form.username }}
+            <small class="help-text">{{ form.username.help_text }}</small>
+            <div class="form-errors">{{ form.username.errors }}</div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Endereço de E-mail:</label>
+            {{ form.email }}
+            <div class="form-errors">{{ form.email.errors }}</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Senha:</label>
+            {{ form.password1 }}
+            <small class="help-text">{{ form.password1.help_text|safe }}</small>
+            <div class="form-errors">{{ form.password1.errors }}</div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Confirmação de Senha:</label>
+            {{ form.password2 }}
+            <div class="form-errors">{{ form.password2.errors }}</div>
+        </div>
+
+        <button type="submit" class="btn">Finalizar Cadastro</button>
+    </form>
+</div>
+{% endblock %}

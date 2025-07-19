@@ -13,15 +13,21 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-    <header class="main-header">
-        <div class="header-content">
-            <a href="{% url 'settings' %}" class="header-icon" title="Configurações"><i class="fas fa-cog"></i></a>
-            <a href="{% url 'create_invite' %}" class="header-link">CONVIDAR</a>
-            <a href="{% url 'logout' %}" class="header-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
-        </div>
-    </header>
-    {% endif %}
+        <header class="main-header">
+            <div class="header-content">
+                <a href="{% url 'socials:feed' %}" class="header-icon" title="Feed"><i class="fas fa-home"></i></a>
+                <a href="{% url 'users:settings' %}" class="header-icon" title="Configurações"><i class="fas fa-cog"></i></a>
+                <a href="{% url 'relations:create_invite' %}" class="header-link">CONVIDAR</a>
+                <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button" title="Sair">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
 
+            </div>
+        </header>
+    {% endif %}
     <main>
         {% block content %}
         {% endblock %}

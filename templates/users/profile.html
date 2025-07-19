@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}@{{ profile_user.username }} - caralhivros{% endblock %}
+
+{% block content %}
+<div class="container feed-layout">
+
+    <div class="feed-main">
+        {% for post in posts %}
+            <div class="post">
+                <h4><a href="{% url 'users:profile' username=post.author.username %}">@{{ post.author.username }}</a></h4>
+                <div class="post-meta">{{ post.created_at|date:"d/m/Y H:i" }}</div>
+                <p>{{ post.content|linebreaksbr }}</p> {# Vamos melhorar isso na Parte 3 #}
+            </div>
+        {% empty %}
+            <div class="post">
+                <h4><a href="{% url 'users:profile' username=post.author.username %}">@{{ post.author.username }}</a></h4>
+            </div>
+        {% endfor %}
+    </div>
+
+    <aside class="sidebar">
+        <div class="user-info-card">
+            <h3>@{{ profile_user.username }}</h3>
+            <p><strong>Biografia:</strong> {{ profile_user.bio|default:"Este usuário não tem uma biografia." }}</p>
+            <p><strong>Na rede desde:</strong> {{ profile_user.date_joined|date:"d/m/Y" }}</p>
+        </div>
+    </aside>
+
+</div>
+{% endblock %}

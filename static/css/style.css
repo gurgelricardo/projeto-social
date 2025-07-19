@@ -198,3 +198,72 @@ a:hover {
 .user-info-card strong {
     color: var(--lilac-neon);
 }
+
+.logout-button {
+    background: none;
+    border: none;
+    color: var(--blue-neon); /* Usa a mesma cor dos outros ícones */
+    font-size: 1.5rem;      /* Usa o mesmo tamanho dos outros ícones */
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    color: var(--lilac-neon);
+    text-shadow: 0 0 5px var(--lilac-neon);
+}
+
+.messages {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--bg-dark);
+}
+
+.message {
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.message.success {
+    color: var(--blue-neon);
+    font-weight: bold;
+}
+
+.message.info {
+    color: var(--text-color);
+    background-color: #333;
+    font-family: monospace;
+    word-wrap: break-word; /* Garante que o link não quebre o layout */
+    padding: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--blue-neon);
+}
+
+.form-group input {
+    margin-bottom: 0.25rem;
+}
+
+.form-errors {
+    color: #ff5555;
+    font-size: 0.9rem;
+    list-style-type: none;
+}
+
+.help-text {
+    font-size: 0.8rem;
+    color: #888;
+}

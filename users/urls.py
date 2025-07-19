@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from .views import settings_view
+from .views import settings_view, profile_view
+
+app_name = "users"
 
 urlpatterns = [
     path(
@@ -10,4 +12,5 @@ urlpatterns = [
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("settings/", settings_view, name="settings"),
+    path("profile/<str:username>/", profile_view, name="profile"),
 ]

@@ -3,16 +3,20 @@
 
 {% block content %}
 <div class="form-card" style="margin-top: 80px;">
-    <h2>Configurar Conta</h2>
+    <h2>Configurar Perfil</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message success" style="background-color: #2a3a2a; color: #a7f0a7;">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
-        <label for="email">Email</label>
-        <input type="email" id="email" value="{{ user.email }}">
         
-        <label for="bio">Biografia</label>
-        <textarea id="bio" rows="4">{{ user.bio }}</textarea>
+        {{ form.as_p }}
 
-        <button type="submit" class="btn">Salvar Alterações</button>
+        <button type="submit" class="btn" style="margin-top: 1rem;">Salvar Alterações</button>
     </form>
 </div>
 {% endblock %}

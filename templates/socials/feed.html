@@ -5,7 +5,6 @@
 <div class="container feed-layout">
 
     <div class="feed-main">
-        
         <div class="post-creator">
             <form method="post" action="{% url 'socials:feed' %}">
                 {% csrf_token %}
@@ -16,9 +15,9 @@
 
         {% for post in posts %}
             <div class="post">
-                <h4><a href="{% url 'users:profile' username=post.author.username %}">@{{ post.author.username }}</a></h4>
+                <h4><a href="#">@{{ post.author.username }}</a></h4>
                 <div class="post-meta">{{ post.created_at|date:"d/m/Y H:i" }}</div>
-                <p>{{ post.content|linebreaksbr }}</p> {# O filtro 'linebreaksbr' preserva as quebras de linha #}
+                <p>{{ post.content|linebreaksbr }}</p>
             </div>
         {% empty %}
             <div class="post">
